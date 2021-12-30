@@ -1,0 +1,1441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:JobService" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:JobService" xmlns:intf="urn:JobService" xmlns:tns1="http://domain.service.webservice.gearworks.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Oct 06, 2010 (02:39:27 GMT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="urn:JobService" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://domain.service.webservice.gearworks.com"/>
+   <element name="updateJobs">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="jobs" type="impl:SvcJob5"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="SvDate">
+    <sequence>
+     <element name="dateString" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="SvFormField">
+    <sequence>
+     <element name="fieldName" nillable="true" type="xsd:string"/>
+     <element name="fieldValue" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfSvFormField">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:SvFormField"/>
+    </sequence>
+   </complexType>
+   <complexType name="SvForm">
+    <sequence>
+     <element name="formData" nillable="true" type="impl:ArrayOfSvFormField"/>
+     <element name="formName" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="SvAddress">
+    <sequence>
+     <element name="apt" nillable="true" type="xsd:string"/>
+     <element name="city" nillable="true" type="xsd:string"/>
+     <element name="state" nillable="true" type="xsd:string"/>
+     <element name="streetAddress" nillable="true" type="xsd:string"/>
+     <element name="zip" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="SvGpsPosition">
+    <sequence>
+     <element name="coverageStatus" type="xsd:int"/>
+     <element name="heading" type="xsd:double"/>
+     <element name="headingCoordinateSystem" nillable="true" type="xsd:string"/>
+     <element name="latitude" type="xsd:double"/>
+     <element name="longitude" type="xsd:double"/>
+     <element name="positionCoordinateSystem" nillable="true" type="xsd:string"/>
+     <element name="speed" type="xsd:double"/>
+     <element name="timestamp" nillable="true" type="impl:SvDate"/>
+     <element name="workerName" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="SvCoordinate">
+    <sequence>
+     <element name="latitude" type="xsd:double"/>
+     <element name="longitude" type="xsd:double"/>
+    </sequence>
+   </complexType>
+   <complexType name="SvWorkzone">
+    <sequence>
+     <element name="circleCenterCoordinate" nillable="true" type="impl:SvCoordinate"/>
+     <element name="circleRadiusMiles" type="xsd:double"/>
+     <element name="workzoneType" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="SvLocation">
+    <sequence>
+     <element name="address" nillable="true" type="impl:SvAddress"/>
+     <element name="contactName" nillable="true" type="xsd:string"/>
+     <element name="contactPhone" nillable="true" type="xsd:string"/>
+     <element name="position" nillable="true" type="impl:SvGpsPosition"/>
+     <element name="workzone" nillable="true" type="impl:SvWorkzone"/>
+    </sequence>
+   </complexType>
+   <complexType name="SvJobAction">
+    <sequence>
+     <element name="dateTime" nillable="true" type="impl:SvDate"/>
+     <element name="form" nillable="true" type="impl:SvForm"/>
+     <element name="location" nillable="true" type="impl:SvLocation"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="workerName" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfSvJobAction">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:SvJobAction"/>
+    </sequence>
+   </complexType>
+   <complexType name="SvJobAttribute">
+    <sequence>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="value" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfSvJobAttribute">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:SvJobAttribute"/>
+    </sequence>
+   </complexType>
+   <complexType name="SvString">
+    <sequence>
+     <element name="value" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="SvJob">
+    <sequence>
+     <element name="actions" nillable="true" type="impl:ArrayOfSvJobAction"/>
+     <element name="actualEndTime" nillable="true" type="impl:SvDate"/>
+     <element name="actualStartTime" nillable="true" type="impl:SvDate"/>
+     <element name="attributes" nillable="true" type="impl:ArrayOfSvJobAttribute"/>
+     <element name="customerTypeCode" nillable="true" type="impl:SvString"/>
+     <element name="deletedDateTime" nillable="true" type="impl:SvDate"/>
+     <element name="description" nillable="true" type="impl:SvString"/>
+     <element name="divisionName" nillable="true" type="impl:SvString"/>
+     <element name="jobCategoryCode" nillable="true" type="impl:SvString"/>
+     <element name="location" nillable="true" type="impl:SvLocation"/>
+     <element name="priority" nillable="true" type="impl:SvString"/>
+     <element name="referenceNumber" nillable="true" type="xsd:string"/>
+     <element name="scheduledEndTime" nillable="true" type="impl:SvDate"/>
+     <element name="scheduledStartTime" nillable="true" type="impl:SvDate"/>
+     <element name="status" nillable="true" type="impl:SvString"/>
+     <element name="workItemTypeName" nillable="true" type="impl:SvString"/>
+     <element name="workerName" nillable="true" type="impl:SvString"/>
+    </sequence>
+   </complexType>
+   <complexType name="SvJobExt">
+    <complexContent>
+     <extension base="impl:SvJob">
+      <sequence>
+       <element name="locationName" nillable="true" type="xsd:string"/>
+       <element name="locationReferenceNumber" nillable="true" type="xsd:string"/>
+       <element name="newLocation" type="xsd:boolean"/>
+       <element name="placeHolder1" nillable="true" type="xsd:string"/>
+       <element name="placeHolder2" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOfSvString">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:SvString"/>
+    </sequence>
+   </complexType>
+   <complexType name="SvcJob">
+    <complexContent>
+     <extension base="impl:SvJobExt">
+      <sequence>
+       <element name="connectionId" nillable="true" type="impl:SvString"/>
+       <element name="createSource" nillable="true" type="xsd:string"/>
+       <element name="createdDateTime" nillable="true" type="impl:SvDate"/>
+       <element name="dispatcherId" nillable="true" type="impl:SvString"/>
+       <element name="emailId" nillable="true" type="impl:SvString"/>
+       <element name="jobDetailsURL" nillable="true" type="impl:SvString"/>
+       <element name="jobPattern" nillable="true" type="impl:SvString"/>
+       <element name="jobSkills" nillable="true" type="impl:ArrayOfSvString"/>
+       <element name="jobStatus" nillable="true" type="impl:SvString"/>
+       <element name="placeHolder3" nillable="true" type="impl:ArrayOfSvString"/>
+       <element name="placeHolder4" nillable="true" type="impl:ArrayOfSvString"/>
+       <element name="rejectReason" nillable="true" type="impl:SvString"/>
+       <element name="rejectedDateTime" nillable="true" type="impl:SvDate"/>
+       <element name="serviceOrganizationId" nillable="true" type="impl:SvString"/>
+       <element name="suspendedTime" nillable="true" type="impl:SvString"/>
+       <element name="timeOnJob" nillable="true" type="impl:SvString"/>
+       <element name="totalTime" nillable="true" type="impl:SvString"/>
+       <element name="updateSource" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="SvInvoicePartsDetail5">
+    <sequence>
+     <element name="labour" type="xsd:boolean"/>
+     <element name="partName" nillable="true" type="xsd:string"/>
+     <element name="partNumber" nillable="true" type="xsd:string"/>
+     <element name="quantity" nillable="true" type="xsd:float"/>
+     <element name="taxRate" nillable="true" type="xsd:double"/>
+     <element name="totalPrice" nillable="true" type="xsd:string"/>
+     <element name="unitPrice" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfSvInvoicePartsDetail5">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:SvInvoicePartsDetail5"/>
+    </sequence>
+   </complexType>
+   <complexType name="SvInvoiceDetail5">
+    <sequence>
+     <element name="currency" nillable="true" type="xsd:string"/>
+     <element name="invoicePartsDetails5" nillable="true" type="impl:ArrayOfSvInvoicePartsDetail5"/>
+     <element name="taxCost" nillable="true" type="xsd:double"/>
+     <element name="totalCost" nillable="true" type="xsd:double"/>
+     <element name="totalLaborCost" nillable="true" type="xsd:double"/>
+     <element name="totalPartsCost" nillable="true" type="xsd:double"/>
+    </sequence>
+   </complexType>
+   <complexType name="SvcJob5">
+    <complexContent>
+     <extension base="impl:SvcJob">
+      <sequence>
+       <element name="invoiceDetail5" nillable="true" type="impl:SvInvoiceDetail5"/>
+       <element name="jobDescription" nillable="true" type="impl:SvString"/>
+       <element name="sendToDeviceDate" nillable="true" type="impl:SvDate"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <element name="updateJobsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="updateJobsReturn" type="impl:SvJobServiceResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="SvResult">
+    <sequence>
+     <element name="errorCode" type="xsd:int"/>
+     <element name="errorMessage" nillable="true" type="xsd:string"/>
+     <element name="goodResult" type="xsd:boolean"/>
+    </sequence>
+   </complexType>
+   <complexType name="SvJobServiceResult">
+    <complexContent>
+     <extension base="impl:SvResult">
+      <sequence>
+       <element name="jobReferenceNumber" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="ValidationException">
+    <sequence/>
+   </complexType>
+   <element name="fault" type="impl:ValidationException"/>
+   <element name="createOrUpdateJobs">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="jobs" type="impl:SvcJob5"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createOrUpdateJobsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="createOrUpdateJobsReturn" type="impl:SvJobServiceResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getJobs">
+    <complexType>
+     <sequence>
+      <element name="start" type="impl:SvDate"/>
+      <element name="end" type="impl:SvDate"/>
+      <element name="includeAttributes" type="xsd:boolean"/>
+      <element name="includeActions" type="xsd:boolean"/>
+      <element name="dispatcherId" type="impl:SvString"/>
+      <element name="serviceOrganizationId" type="impl:SvString"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getJobsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getJobsReturn" type="impl:SvcJob5"/>
+      <element name="end" type="impl:SvDate"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getJobsByDivision">
+    <complexType>
+     <sequence>
+      <element name="start" type="impl:SvDate"/>
+      <element name="end" type="impl:SvDate"/>
+      <element name="includeAttributes" type="xsd:boolean"/>
+      <element name="includeActions" type="xsd:boolean"/>
+      <element maxOccurs="unbounded" name="divisions" type="impl:SvDivision"/>
+      <element name="dispatcherId" type="impl:SvString"/>
+      <element name="serviceOrganizationId" type="impl:SvString"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="SvDivision">
+    <sequence>
+     <element name="name" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="getJobsByDivisionResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getJobsByDivisionReturn" type="impl:SvcJob5"/>
+      <element name="end" type="impl:SvDate"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getUpdatedActions">
+    <complexType>
+     <sequence>
+      <element name="start" type="impl:SvDate"/>
+      <element name="end" type="impl:SvDate"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getUpdatedActionsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getUpdatedActionsReturn" type="impl:SvcJobExtActionUpdate"/>
+      <element name="end" type="impl:SvDate"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="SvcJobActionUpdate">
+    <complexContent>
+     <extension base="tns1:SvJobActionUpdate">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="SvcJobExtActionUpdate">
+    <complexContent>
+     <extension base="impl:SvcJobActionUpdate">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <element name="getUpdatedActionsByDivision">
+    <complexType>
+     <sequence>
+      <element name="start" type="impl:SvDate"/>
+      <element name="end" type="impl:SvDate"/>
+      <element maxOccurs="unbounded" name="divisions" type="impl:SvDivision"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getUpdatedActionsByDivisionResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getUpdatedActionsByDivisionReturn" type="impl:SvcJobExtActionUpdate"/>
+      <element name="end" type="impl:SvDate"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getJobActions">
+    <complexType>
+     <sequence>
+      <element name="start" type="impl:SvDate"/>
+      <element name="end" type="impl:SvDate"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getJobActionsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getJobActionsReturn" type="impl:SvcJobExtActionUpdate"/>
+      <element name="end" type="impl:SvDate"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getJobActionsByDivision">
+    <complexType>
+     <sequence>
+      <element name="start" type="impl:SvDate"/>
+      <element name="end" type="impl:SvDate"/>
+      <element maxOccurs="unbounded" name="divisions" type="impl:SvDivision"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getJobActionsByDivisionResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getJobActionsByDivisionReturn" type="impl:SvcJobExtActionUpdate"/>
+      <element name="end" type="impl:SvDate"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getJobByReferenceNumber">
+    <complexType>
+     <sequence>
+      <element name="referenceNumber" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getJobByReferenceNumberResponse">
+    <complexType>
+     <sequence>
+      <element name="getJobByReferenceNumberReturn" type="impl:SvcJob5"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="cancelJobs">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="referenceNumbers" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="cancelJobsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="cancelJobsReturn" type="impl:SvJobServiceResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createJobs">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="jobs" type="impl:SvcJob5"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createJobsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="createJobsReturn" type="impl:SvJobServiceResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="submitJobAction">
+    <complexType>
+     <sequence>
+      <element name="jobAction" type="impl:SvJobAction"/>
+      <element name="referenceNumber" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="submitJobActionResponse">
+    <complexType>
+     <sequence>
+      <element name="submitJobActionReturn" type="impl:SvResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="assignWorkerAndUpdateJob">
+    <complexType>
+     <sequence>
+      <element name="workerName" type="xsd:string"/>
+      <element name="svJob" type="impl:SvJob"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="assignWorkerAndUpdateJobResponse">
+    <complexType>
+     <sequence>
+      <element name="assignWorkerAndUpdateJobReturn" type="impl:SvResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="assignWorkerToJob">
+    <complexType>
+     <sequence>
+      <element name="referenceNumber" type="xsd:string"/>
+      <element name="workerName" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="assignWorkerToJobResponse">
+    <complexType>
+     <sequence>
+      <element name="assignWorkerToJobReturn" type="impl:SvResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="unassignJob">
+    <complexType>
+     <sequence>
+      <element name="referenceNumber" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="unassignJobResponse">
+    <complexType>
+     <sequence>
+      <element name="unassignJobReturn" type="impl:SvResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeWorkerFromJob">
+    <complexType>
+     <sequence>
+      <element name="referenceNumber" type="xsd:string"/>
+      <element name="workerName" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeWorkerFromJobResponse">
+    <complexType>
+     <sequence>
+      <element name="removeWorkerFromJobReturn" type="impl:SvResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="restoreJob">
+    <complexType>
+     <sequence>
+      <element name="referenceNumber" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="restoreJobResponse">
+    <complexType>
+     <sequence>
+      <element name="restoreJobReturn" type="impl:SvResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="terminateJob">
+    <complexType>
+     <sequence>
+      <element name="referenceNumber" type="xsd:string"/>
+      <element name="completionDateTime" type="impl:SvDate"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="terminateJobResponse">
+    <complexType>
+     <sequence>
+      <element name="terminateJobReturn" type="impl:SvResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="terminateJobForWorker">
+    <complexType>
+     <sequence>
+      <element name="referenceNumber" type="xsd:string"/>
+      <element name="workerName" type="xsd:string"/>
+      <element name="completionDateTime" type="impl:SvDate"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="terminateJobForWorkerResponse">
+    <complexType>
+     <sequence>
+      <element name="terminateJobForWorkerReturn" type="impl:SvResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteJob">
+    <complexType>
+     <sequence>
+      <element name="referenceNumber" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteJobResponse">
+    <complexType>
+     <sequence>
+      <element name="deleteJobReturn" type="impl:SvResult"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://domain.service.webservice.gearworks.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="urn:JobService"/>
+   <complexType name="SvJobActionUpdate">
+    <sequence>
+     <element name="job" nillable="true" type="impl:SvJob"/>
+     <element name="updatedActions" nillable="true" type="impl:ArrayOfSvJobAction"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="deleteJobRequest">
+
+      <wsdl:part element="impl:deleteJob" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="submitJobActionResponse">
+
+      <wsdl:part element="impl:submitJobActionResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getJobsByDivisionResponse">
+
+      <wsdl:part element="impl:getJobsByDivisionResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="createJobsRequest">
+
+      <wsdl:part element="impl:createJobs" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getJobsResponse">
+
+      <wsdl:part element="impl:getJobsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getJobsByDivisionRequest">
+
+      <wsdl:part element="impl:getJobsByDivision" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getJobsRequest">
+
+      <wsdl:part element="impl:getJobs" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateJobsRequest">
+
+      <wsdl:part element="impl:updateJobs" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="terminateJobForWorkerRequest">
+
+      <wsdl:part element="impl:terminateJobForWorker" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getUpdatedActionsResponse">
+
+      <wsdl:part element="impl:getUpdatedActionsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getUpdatedActionsRequest">
+
+      <wsdl:part element="impl:getUpdatedActions" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="terminateJobResponse">
+
+      <wsdl:part element="impl:terminateJobResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getUpdatedActionsByDivisionResponse">
+
+      <wsdl:part element="impl:getUpdatedActionsByDivisionResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteJobResponse">
+
+      <wsdl:part element="impl:deleteJobResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getJobActionsResponse">
+
+      <wsdl:part element="impl:getJobActionsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="cancelJobsResponse">
+
+      <wsdl:part element="impl:cancelJobsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="assignWorkerAndUpdateJobRequest">
+
+      <wsdl:part element="impl:assignWorkerAndUpdateJob" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="assignWorkerToJobResponse">
+
+      <wsdl:part element="impl:assignWorkerToJobResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getJobByReferenceNumberRequest">
+
+      <wsdl:part element="impl:getJobByReferenceNumber" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateJobsResponse">
+
+      <wsdl:part element="impl:updateJobsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="terminateJobRequest">
+
+      <wsdl:part element="impl:terminateJob" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="submitJobActionRequest">
+
+      <wsdl:part element="impl:submitJobAction" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="terminateJobForWorkerResponse">
+
+      <wsdl:part element="impl:terminateJobForWorkerResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="createOrUpdateJobsRequest">
+
+      <wsdl:part element="impl:createOrUpdateJobs" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeWorkerFromJobRequest">
+
+      <wsdl:part element="impl:removeWorkerFromJob" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="ValidationException">
+
+      <wsdl:part element="impl:fault" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getJobActionsByDivisionResponse">
+
+      <wsdl:part element="impl:getJobActionsByDivisionResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="unassignJobRequest">
+
+      <wsdl:part element="impl:unassignJob" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="cancelJobsRequest">
+
+      <wsdl:part element="impl:cancelJobs" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getJobActionsRequest">
+
+      <wsdl:part element="impl:getJobActions" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getJobByReferenceNumberResponse">
+
+      <wsdl:part element="impl:getJobByReferenceNumberResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="createOrUpdateJobsResponse">
+
+      <wsdl:part element="impl:createOrUpdateJobsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="unassignJobResponse">
+
+      <wsdl:part element="impl:unassignJobResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getUpdatedActionsByDivisionRequest">
+
+      <wsdl:part element="impl:getUpdatedActionsByDivision" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeWorkerFromJobResponse">
+
+      <wsdl:part element="impl:removeWorkerFromJobResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="restoreJobRequest">
+
+      <wsdl:part element="impl:restoreJob" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getJobActionsByDivisionRequest">
+
+      <wsdl:part element="impl:getJobActionsByDivision" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="createJobsResponse">
+
+      <wsdl:part element="impl:createJobsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="assignWorkerAndUpdateJobResponse">
+
+      <wsdl:part element="impl:assignWorkerAndUpdateJobResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="assignWorkerToJobRequest">
+
+      <wsdl:part element="impl:assignWorkerToJob" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="restoreJobResponse">
+
+      <wsdl:part element="impl:restoreJobResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="JobWebServiceProxy5">
+
+      <wsdl:operation name="updateJobs">
+
+         <wsdl:input message="impl:updateJobsRequest" name="updateJobsRequest"/>
+
+         <wsdl:output message="impl:updateJobsResponse" name="updateJobsResponse"/>
+
+         <wsdl:fault message="impl:ValidationException" name="ValidationException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createOrUpdateJobs">
+
+         <wsdl:input message="impl:createOrUpdateJobsRequest" name="createOrUpdateJobsRequest"/>
+
+         <wsdl:output message="impl:createOrUpdateJobsResponse" name="createOrUpdateJobsResponse"/>
+
+         <wsdl:fault message="impl:ValidationException" name="ValidationException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getJobs">
+
+         <wsdl:input message="impl:getJobsRequest" name="getJobsRequest"/>
+
+         <wsdl:output message="impl:getJobsResponse" name="getJobsResponse"/>
+
+         <wsdl:fault message="impl:ValidationException" name="ValidationException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getJobsByDivision">
+
+         <wsdl:input message="impl:getJobsByDivisionRequest" name="getJobsByDivisionRequest"/>
+
+         <wsdl:output message="impl:getJobsByDivisionResponse" name="getJobsByDivisionResponse"/>
+
+         <wsdl:fault message="impl:ValidationException" name="ValidationException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getUpdatedActions">
+
+         <wsdl:input message="impl:getUpdatedActionsRequest" name="getUpdatedActionsRequest"/>
+
+         <wsdl:output message="impl:getUpdatedActionsResponse" name="getUpdatedActionsResponse"/>
+
+         <wsdl:fault message="impl:ValidationException" name="ValidationException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getUpdatedActionsByDivision">
+
+         <wsdl:input message="impl:getUpdatedActionsByDivisionRequest" name="getUpdatedActionsByDivisionRequest"/>
+
+         <wsdl:output message="impl:getUpdatedActionsByDivisionResponse" name="getUpdatedActionsByDivisionResponse"/>
+
+         <wsdl:fault message="impl:ValidationException" name="ValidationException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getJobActions">
+
+         <wsdl:input message="impl:getJobActionsRequest" name="getJobActionsRequest"/>
+
+         <wsdl:output message="impl:getJobActionsResponse" name="getJobActionsResponse"/>
+
+         <wsdl:fault message="impl:ValidationException" name="ValidationException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getJobActionsByDivision">
+
+         <wsdl:input message="impl:getJobActionsByDivisionRequest" name="getJobActionsByDivisionRequest"/>
+
+         <wsdl:output message="impl:getJobActionsByDivisionResponse" name="getJobActionsByDivisionResponse"/>
+
+         <wsdl:fault message="impl:ValidationException" name="ValidationException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getJobByReferenceNumber">
+
+         <wsdl:input message="impl:getJobByReferenceNumberRequest" name="getJobByReferenceNumberRequest"/>
+
+         <wsdl:output message="impl:getJobByReferenceNumberResponse" name="getJobByReferenceNumberResponse"/>
+
+         <wsdl:fault message="impl:ValidationException" name="ValidationException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="cancelJobs">
+
+         <wsdl:input message="impl:cancelJobsRequest" name="cancelJobsRequest"/>
+
+         <wsdl:output message="impl:cancelJobsResponse" name="cancelJobsResponse"/>
+
+         <wsdl:fault message="impl:ValidationException" name="ValidationException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createJobs">
+
+         <wsdl:input message="impl:createJobsRequest" name="createJobsRequest"/>
+
+         <wsdl:output message="impl:createJobsResponse" name="createJobsResponse"/>
+
+         <wsdl:fault message="impl:ValidationException" name="ValidationException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="submitJobAction">
+
+         <wsdl:input message="impl:submitJobActionRequest" name="submitJobActionRequest"/>
+
+         <wsdl:output message="impl:submitJobActionResponse" name="submitJobActionResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="assignWorkerAndUpdateJob">
+
+         <wsdl:input message="impl:assignWorkerAndUpdateJobRequest" name="assignWorkerAndUpdateJobRequest"/>
+
+         <wsdl:output message="impl:assignWorkerAndUpdateJobResponse" name="assignWorkerAndUpdateJobResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="assignWorkerToJob">
+
+         <wsdl:input message="impl:assignWorkerToJobRequest" name="assignWorkerToJobRequest"/>
+
+         <wsdl:output message="impl:assignWorkerToJobResponse" name="assignWorkerToJobResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="unassignJob">
+
+         <wsdl:input message="impl:unassignJobRequest" name="unassignJobRequest"/>
+
+         <wsdl:output message="impl:unassignJobResponse" name="unassignJobResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeWorkerFromJob">
+
+         <wsdl:input message="impl:removeWorkerFromJobRequest" name="removeWorkerFromJobRequest"/>
+
+         <wsdl:output message="impl:removeWorkerFromJobResponse" name="removeWorkerFromJobResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="restoreJob">
+
+         <wsdl:input message="impl:restoreJobRequest" name="restoreJobRequest"/>
+
+         <wsdl:output message="impl:restoreJobResponse" name="restoreJobResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="terminateJob">
+
+         <wsdl:input message="impl:terminateJobRequest" name="terminateJobRequest"/>
+
+         <wsdl:output message="impl:terminateJobResponse" name="terminateJobResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="terminateJobForWorker">
+
+         <wsdl:input message="impl:terminateJobForWorkerRequest" name="terminateJobForWorkerRequest"/>
+
+         <wsdl:output message="impl:terminateJobForWorkerResponse" name="terminateJobForWorkerResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteJob">
+
+         <wsdl:input message="impl:deleteJobRequest" name="deleteJobRequest"/>
+
+         <wsdl:output message="impl:deleteJobResponse" name="deleteJobResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="JobService-wrapped-0.0.5SoapBinding" type="impl:JobWebServiceProxy5">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="updateJobs">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="updateJobsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="updateJobsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="ValidationException">
+
+            <wsdlsoap:fault name="ValidationException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createOrUpdateJobs">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createOrUpdateJobsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createOrUpdateJobsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="ValidationException">
+
+            <wsdlsoap:fault name="ValidationException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getJobs">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getJobsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getJobsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="ValidationException">
+
+            <wsdlsoap:fault name="ValidationException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getJobsByDivision">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getJobsByDivisionRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getJobsByDivisionResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="ValidationException">
+
+            <wsdlsoap:fault name="ValidationException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getUpdatedActions">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getUpdatedActionsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getUpdatedActionsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="ValidationException">
+
+            <wsdlsoap:fault name="ValidationException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getUpdatedActionsByDivision">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getUpdatedActionsByDivisionRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getUpdatedActionsByDivisionResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="ValidationException">
+
+            <wsdlsoap:fault name="ValidationException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getJobActions">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getJobActionsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getJobActionsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="ValidationException">
+
+            <wsdlsoap:fault name="ValidationException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getJobActionsByDivision">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getJobActionsByDivisionRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getJobActionsByDivisionResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="ValidationException">
+
+            <wsdlsoap:fault name="ValidationException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getJobByReferenceNumber">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getJobByReferenceNumberRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getJobByReferenceNumberResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="ValidationException">
+
+            <wsdlsoap:fault name="ValidationException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="cancelJobs">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="cancelJobsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="cancelJobsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="ValidationException">
+
+            <wsdlsoap:fault name="ValidationException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createJobs">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createJobsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createJobsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="ValidationException">
+
+            <wsdlsoap:fault name="ValidationException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="submitJobAction">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="submitJobActionRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="submitJobActionResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="assignWorkerAndUpdateJob">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="assignWorkerAndUpdateJobRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="assignWorkerAndUpdateJobResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="assignWorkerToJob">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="assignWorkerToJobRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="assignWorkerToJobResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="unassignJob">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="unassignJobRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="unassignJobResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeWorkerFromJob">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="removeWorkerFromJobRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="removeWorkerFromJobResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="restoreJob">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="restoreJobRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="restoreJobResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="terminateJob">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="terminateJobRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="terminateJobResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="terminateJobForWorker">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="terminateJobForWorkerRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="terminateJobForWorkerResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteJob">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="deleteJobRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteJobResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="JobWebServiceProxy5Service">
+
+      <wsdl:port binding="impl:JobService-wrapped-0.0.5SoapBinding" name="JobService-wrapped-0.0.5">
+
+         <wsdlsoap:address location="https://webservices.fieldforcemanager.com/services/services/JobService-wrapped-0.0.5"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
